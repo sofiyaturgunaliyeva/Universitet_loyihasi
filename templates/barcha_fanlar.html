@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="get">
+        <input type="text" name="qidiruv">
+        <button>Qidirish</button>
+    </form>
+    <br>
+    <br>
+    <h1> Barcha fanlar :</h1>
+    <br>
+    {% for fan in fanlar %}
+    <h2> {{fan}}</h2>
+    <a href = /fan_ochir/{{fan.id}}/><button> O'chirish </button>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form method="get">
+        <input type="text" name="qidiruv">
+        <button>Qidirish</button>
+    </form>
+    <br>
+    <br>
+    <h1> Barcha yonalishlar :</h1>
+    <br>
+    {% for yonalish in yonalishlar %}
+    <h2> {{yonalish}}</h2>
+    <a href = /yonalish_ochirish/{{yonalish.id}}/><button> O'chirish </button>
+    {% endfor %}
+</body>
+</html>

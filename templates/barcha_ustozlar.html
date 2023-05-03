@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+     <form method="get">
+        <input type="text" name="qidiruv">
+        <button>Qidirish</button>
+    </form>
+    <br>
+    <br>
+    <h1> Barcha ustozlar :</h1>
+    <br>
+    {% for ustoz in ustozlar %}
+    <h2> {{ustoz}}</h2>
+    <a href = /ustoz_ochirish/{{ustoz.id}}/><button> O'chirish </button>
+    {% endfor %}
+
+</body>
+</html>
