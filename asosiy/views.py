@@ -17,6 +17,12 @@ def fan_ochir(sorov,son):
 # 6-topshiriq Biron yo’nalishni o’chirib yuboruvchi view yozing.
 
 def barcha_yonalish(sorov):
+    if sorov.method == 'POST':
+        Yonalish.objects.create(
+            nom =sorov.POST.get('n'),
+            aktiv=True
+        )
+        return redirect('/barcha_yonalish/')
     soz = sorov.GET.get('qidiruv')
     if soz == "" or soz is None:
         content = {
@@ -59,16 +65,29 @@ def barcha_fanlar(sorov):
 # 8- topshiriq Ustozni ismi bo’yicha qidirish imkoniyatini qo’shing.
 
 def barcha_ustozlar(sorov):
+    if sorov.method == 'POST':
+        Ustoz.objects.create(
+            ism=sorov.POST.get('i'),
+            yosh=sorov.POST.get('y'),
+            jins=sorov.POST.get('j'),
+            daraja=sorov.POST.get('d'),
+            fan=Fan.objects.get(id=sorov.POST.get('f'))
+        )
+        return redirect('/barcha_ustozlar/')
+
     soz = sorov.GET.get('qidiruv')
     if soz == "" or soz is None:
         content = {
-            "ustozlar": Ustoz.objects.all()
+            "ustozlar": Ustoz.objects.all(),
+            "fanlar": Fan.objects.all()
         }
     else:
         content = {
-            "ustozlar": Ustoz.objects.filter(ism__contains = soz)
+            "ustozlar": Ustoz.objects.filter(ism__contains=soz),
+            "fanlar": Fan.objects.filter(nom__contains=soz)
         }
-    return render(sorov, 'barcha_ustozlar.html',content)
+
+    return render(sorov, 'barcha_ustozlar.html', content)
 
 
 # 9-topshiriq Biron ustozni o’chirib yuborish uchun view yozing.

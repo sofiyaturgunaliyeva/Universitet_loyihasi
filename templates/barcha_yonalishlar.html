@@ -17,5 +17,11 @@
     <h2> {{yonalish}}</h2>
     <a href = /yonalish_ochirish/{{yonalish.id}}/><button> O'chirish </button>
     {% endfor %}
+    <br>
+    <br>
+    <form method="post">{% csrf_token %}
+        <input type="text" name="n" placeholder="Nom">
+     <button type ="submit" > Qo'shish </button>
+    </form>
 </body>
 </html>
