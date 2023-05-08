@@ -35,14 +35,23 @@ def yonalish_ochirish(sorov,son):
 
 # 7-topshiriq 7. Fanni nomi bo’yicha qidirish imkoniyatini qo’shing.
 def barcha_fanlar(sorov):
+    if sorov.method == 'POST':
+        Fan.objects.create(
+            nom = sorov.POST.get('n'),
+            yonalish = Yonalish.objects.get(id=sorov.POST.get('y')),
+            asosiy = True
+        )
+        return redirect('/barcha_fanlar/')
     soz = sorov.GET.get('qidiruv')
     if soz == "" or soz is None:
         content = {
-            "fanlar": Fan.objects.all()
+            "fanlar": Fan.objects.all(),
+            "yonalishlar": Yonalish.objects.all()
         }
     else:
         content = {
-            "fanlar": Fan.objects.filter(nom__contains = soz)
+            "fanlar": Fan.objects.filter(nom__contains = soz),
+            "yonalishlar": Yonalish.objects.filter(nom__contains = soz),
         }
     return render(sorov, 'barcha_fanlar.html',content)
 
@@ -67,3 +76,4 @@ def barcha_ustozlar(sorov):
 def ustoz_ochirish(sorov,son):
     Ustoz.objects.filter(id = son).delete()
     return redirect('/barcha_ustozlar/')
+
