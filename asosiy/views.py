@@ -96,3 +96,56 @@ def ustoz_ochirish(sorov,son):
     Ustoz.objects.filter(id = son).delete()
     return redirect('/barcha_ustozlar/')
 
+
+
+# Vazifa
+ # 4-topshiriq  Universitet loyihasidagi Fan ma’lumotini o’zgartirish imkoniyatini qo’shing.
+
+def fan_ozgartir(sorov, son):
+    if sorov.method == 'POST':
+        Fan.objects.filter(id = son).update(
+            nom = sorov.POST.get('n'),
+            yonalish = Yonalish.objects.get(id = sorov.POST.get('y')),
+            asosiy = True
+        )
+        return redirect('/barcha_fanlar/')
+    f = Fan.objects.get(id = son)
+    content = {
+        "fanlar": f,
+        "yonalishlar": Yonalish.objects.exclude(id=f.yonalish.id)
+    }
+    return render(sorov, 'fan_ozgartir.html', content)
+
+
+# 5-topshiriq  Yo’nalish ma’lumotini o’zgartirish imkoniyatini qo’shing.
+
+def yonalish_ozgartir(sorov, son):
+    if sorov.method == 'POST':
+        Yonalish.objects.filter(id = son).update(
+            nom = sorov.POST.get('n'),
+            aktiv = True
+        )
+        return redirect('/barcha_yonalish/')
+    content = {
+        "yonalish": Yonalish.objects.get(id = son)
+    }
+    return render(sorov, 'yonalish_ozgartir.html', content)
+
+# 6-topshiriq  Ustoz ma’lumotini o’zgartirish imkoniyatini qo’shing.
+
+def ustoz_ozgartir(sorov, son):
+    if sorov.method == 'POST':
+        Ustoz.objects.filter(id = son).update(
+            ism = sorov.POST.get('i'),
+            yosh =sorov.POST.get('y'),
+            jins=sorov.POST.get('j'),
+            daraja=sorov.POST.get('d'),
+            fan = Fan.objects.get(id = sorov.POST.get('f')),
+        )
+        return redirect('/barcha_ustozlar/')
+    u = Ustoz.objects.get(id = son)
+    content = {
+        "ustoz": u,
+        "fanlar": Fan.objects.exclude(id=u.fan.id)
+    }
+    return render(sorov, 'ustoz_ozgartir.html', content)
