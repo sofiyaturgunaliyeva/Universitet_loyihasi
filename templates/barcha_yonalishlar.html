@@ -14,13 +14,14 @@
     <h1> Barcha yonalishlar :</h1>
     <br>
     {% for yonalish in yonalishlar %}
-    <h2> {{yonalish}}</h2>
+    <h3> <a href="/yonalish_ozgartir/{{yonalish.id}}/">{{yonalish.nom}}</a ></h3>
   <a href = /yonalish_ochirish/{{yonalish.id}}/><button> O'chirish </button> </a>
     {% endfor %}
     <br>
     <br>
     <form method="post">{% csrf_token %}
-        <input type="text" name="n" placeholder="Nom">
+        {{forma}}
+<!--        <input type="text" name="n" placeholder="Nom">-->
      <button type ="submit" > Qo'shish </button>
     </form>
 </body>

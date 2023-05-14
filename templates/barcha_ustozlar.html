@@ -14,30 +14,31 @@
     <h1> Barcha ustozlar :</h1>
     <br>
     {% for ustoz in ustozlar %}
-    <h2> {{ustoz}}</h2>
+    <h3> <a href="/ustoz_ozgartir/{{ustoz.id}}/">{{ustoz.ism}}</a ></h3>
     <a href="/ustoz_ochirish/{{ustoz.id}}/"><button> O'chirish </button></a>
     {% endfor %}
     <br>
     <br>
     <form method="post">{% csrf_token %}
-        <input type="text" name="i" placeholder="Ism">
-        <input type="number" name="y" placeholder="Yosh">
-          <select name="j">
-            <option value="Ayol">Ayol</option>
-            <option value="Erkak">Erkak</option>
-        </select>
-        <select name="d">
-            <option value="Bakalavr">Bakalavr</option>
-            <option value="Magistr">Magistr</option>
-            <option value="Aspirant">Aspirant</option>
-            <option value="Doktor">Doktor</option>
-        </select>
-        <select name="f">
-            {% for i in fanlar %}
-            <option value="{{i.id}}">{{i.nom}}</option>
+        {{forma}}
+<!--        <input type="text" name="i" placeholder="Ism">-->
+<!--        <input type="number" name="y" placeholder="Yosh">-->
+<!--          <select name="j">-->
+<!--            <option value="Ayol">Ayol</option>-->
+<!--            <option value="Erkak">Erkak</option>-->
+<!--        </select>-->
+<!--        <select name="d">-->
+<!--            <option value="Bakalavr">Bakalavr</option>-->
+<!--            <option value="Magistr">Magistr</option>-->
+<!--            <option value="Aspirant">Aspirant</option>-->
+<!--            <option value="Doktor">Doktor</option>-->
+<!--        </select>-->
+<!--        <select name="f">-->
+<!--            {% for i in fanlar %}-->
+<!--            <option value="{{i.id}}">{{i.nom}}</option>-->
 
-            {% endfor %}
-        </select>
+<!--            {% endfor %}-->
+<!--        </select>-->
      <button type ="submit" > Qo'shish </button>
     </form>
 
